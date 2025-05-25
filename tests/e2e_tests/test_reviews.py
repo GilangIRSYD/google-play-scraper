@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 
 from google_play_scraper import Sort
 from google_play_scraper.features.reviews import (
-    _ContinuationToken,
+    ContinuationToken,
     _fetch_review_items,
     reviews,
 )
@@ -207,7 +207,7 @@ class TestReviews(TestCase):
         ) as m:
             _ = reviews(
                 "com.mojang.minecraftpe",
-                continuation_token=_ContinuationToken(
+                continuation_token=ContinuationToken(
                     "", "ko", "kr", Sort.MOST_RELEVANT, 10, 5, None
                 ),
                 lang="jp",
@@ -225,7 +225,7 @@ class TestReviews(TestCase):
     def test_invalid_continuation_token(self):
         result, ct = reviews(
             "com.mojang.minecraftpe",
-            continuation_token=_ContinuationToken(
+            continuation_token=ContinuationToken(
                 "foo", "ko", "kr", Sort.MOST_RELEVANT, 10, 5, None
             ),
         )

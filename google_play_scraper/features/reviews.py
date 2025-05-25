@@ -11,7 +11,7 @@ from google_play_scraper.utils.request import post
 MAX_COUNT_EACH_FETCH = 4500
 
 
-class _ContinuationToken:
+class ContinuationToken:
     __slots__ = (
         "token",
         "lang",
@@ -75,8 +75,8 @@ def reviews(
     count: int = 100,
     filter_score_with: int = None,
     filter_device_with: int = None,
-    continuation_token: _ContinuationToken = None,
-) -> Tuple[List[dict], _ContinuationToken]:
+    continuation_token: ContinuationToken = None,
+) -> Tuple[List[dict], ContinuationToken]:
     sort = sort.value
 
     if continuation_token is not None:
@@ -142,7 +142,7 @@ def reviews(
 
     return (
         result,
-        _ContinuationToken(
+        ContinuationToken(
             token, lang, country, sort, count, filter_score_with, filter_device_with
         ),
     )
